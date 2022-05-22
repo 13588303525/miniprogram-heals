@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "水果园",
+  "usingComponents": {
+    "mySearch":"/components/search/search",
+    "swiper": "/components/swiper/swiper"
+  }
+
+}
