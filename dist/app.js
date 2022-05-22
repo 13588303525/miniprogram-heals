@@ -11,7 +11,10 @@ App({
     
   },
   userId: 0,
-  cartItem:[0,0,0,0,0,0,0,0,0,0,0,0],
+  cartItem:{},
+  
+
+  hasInCart: false,
 // 微信授权登录
 weixinLogin() {
   // 获取code

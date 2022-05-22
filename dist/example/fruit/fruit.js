@@ -13,13 +13,13 @@ Page({
         { id: 1, name: "鲜花" }
       ],
       fruitInfo: [
-        { _id: 0,onShow: 1,imgUrl: '/images/apple.png', name: "苹果",price: 1, unit:1},
-        { _id: 1,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:1},
-        { _id: 2,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:1},
-        { _id: 3,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:1},
-        { _id: 4,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:1},
-        { _id: 5,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:1},
-        { _id: 6,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:1},
+        { _id: 0,onShow: 1,imgUrl: '/images/apple.png', name: "苹果",price: 1, unit:'个'},
+        { _id: 1,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:'根'},
+        { _id: 2,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:'个'},
+        { _id: 3,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:'根'},
+        { _id: 4,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:'个'},
+        { _id: 5,onShow: 1,imgUrl: '/images/banana.png', name: "香蕉",price: 3, unit:'根'},
+        { _id: 6,onShow: 1,imgUrl: '/images/pear.png', name: "雪梨",price: 2, unit:'个'},
       ],
       activeTypeId: 0,
       isShow:true, 
@@ -51,12 +51,23 @@ Page({
 
   // console.log(e.currentTarget.dataset._id)
   var self = this
-  let newItem = {}
-
-      // console.log(e.data["0"])
-      app.cartItem[e.currentTarget.dataset._id] = app.cartItem[e.currentTarget.dataset._id] +1;
+  let item = {}
+      //app.cartItem[e.currentTarget.dataset._id] +1;
+      item=self.data.fruitInfo[e.currentTarget.dataset._id];
+      //app.cartItem[e.currentTarget.dataset._id]=item;
+      //console.log("fff"+app.cartItem[e.currentTarget.dataset._id].price)
+      if(app.cartItem[e.currentTarget.dataset._id] !=null) {
+        item=app.cartItem[e.currentTarget.dataset._id];
+        item['num']=app.cartItem[e.currentTarget.dataset._id].num + 1;
+      } else {
+        item=self.data.fruitInfo[e.currentTarget.dataset._id];
+        item['selected']=true;
+        item['num']= 1; 
+      }
+      app.cartItem[e.currentTarget.dataset._id] = item;
       console.log(e.currentTarget.dataset._id )
       console.log(app.cartItem[e.currentTarget.dataset._id] )
+      app.hasInCart=true
       //app.isNotRepeteToCart(newCartItem)
       wx.showToast({
         title: '已添加至购物车',
