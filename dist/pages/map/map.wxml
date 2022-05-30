@@ -1,0 +1,19 @@
+<!-- <input placeholder="请选择地址..." value="{{mapName}}"></input>
+<button bindtap="moveToLocation">地图选点</button>
+<button bindtap="getLocation">获取定位</button> -->
+
+
+
+<map wx:if="{{isShowStore}}" id="map" style="width: 100%; height:100%;" scale="{{scale}}" markers="{{storesLocation}}" longitude="{{longitude}}" latitude="{{latitude}}" show-location='true'>
+  <cover-view class='cover-smaller'>
+    <cover-image class='icon-set' bindtap='returnMapPage' src='../../icon/return.png' style="height: 10%; width: 10%;"/>
+  </cover-view>
+  <cover-view class='cover-smaller'>
+    <cover-image class='icon-set' bindtap='returnCurrentLoaction' src='../../icon/location.png' style="height: 10%; width: 10%;"/>
+  </cover-view>
+</map>
+
+<view wx:else>
+  <button bindtap="joinStore">商户加盟</button>
+  <button bindtap="showStore">查看周围商铺</button>
+</view>
