@@ -1,0 +1,21 @@
+<view class="main">
+
+
+
+<view class="form-box">
+    <form bindsubmit="formSubmit">
+        <input value="{{userAddress.name}}" name="name" placeholder="姓名"/>
+        <input type="digit" name="phone" value="{{userAddress.phone}}" placeholder="电话号码"/>
+        <view  class='getLocationButton'>
+        <view style = "width: 70%;" > <input type="digit" name="address" value="{{userAddress.address}}" placeholder="详细地址"/></view>
+        <view style = "width: 30%; " > <button style = "width: 100px; "  bindtap="getLocation">选择</button></view>
+        </view>
+        <view>备注：</view>
+        <view class='message'>
+          <textarea name="message" value="{{userAddress.message}}"></textarea>
+        </view>
+        <button form-type="submit">保存</button>
+    </form>
+</view>
+
+</view>

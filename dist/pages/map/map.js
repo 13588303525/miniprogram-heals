@@ -42,8 +42,33 @@ Page({
         latitude: 23.127795,
         longitude: 113.265576
       }
-    ]
+    ],
 
+    
+    userAddress: {
+      name: '',
+      phone: '',
+      // detail: ''
+      detail: 0,
+      message: "",
+      address: "",  //地址
+      latitude: 0, //首次加载维度
+      longitude: 0 //首次加载的经度
+      },
+  },
+  formSubmit(e) {
+    const value = e.detail.value;
+     console.log(value)
+    if (value.name && value.phone.length === 11 ) {
+      console.log(value)
+      // 保存到数据库中
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请填写完整资料',
+        showCancel: false
+      })
+    }
   },
   onLoad(options) {
     // 实例化API核心类
@@ -82,7 +107,7 @@ Page({
     let that = this
     wx.chooseLocation({
       success(res) {
-        let storesLocation = that.data.storesLocation
+        /*let storesLocation = that.data.storesLocation
         let storeLoaction = [{
           id: storesLocation.length+1,
           iconPath: "../../images/apple.png",
@@ -94,12 +119,28 @@ Page({
         }]
         console.log("地图选点: "+ that.data.storesLocation.length)  
         storesLocation.push(...storeLoaction)
-        
+        console.log("地图选点: "+ that.data.storeLocation.title)  
         that.setData({
           storesLocation: storesLocation
         })
         console.log(that.data.storesLocation) 
+        // console.log("地图选点: "+that.data.storesLocation)*/
+
+        console.log(res.address)  
         // console.log("地图选点: "+that.data.storesLocation)
+        let userAddress =  {
+          name: '',
+          phone: '',
+          // detail: ''
+          detail: 0,
+          message: "",
+          address:res.address,  //地址
+          latitude: res.latitude, //首次加载维度
+          longitude: res.longitude //首次加载的经度
+          }
+        that.setData({
+          userAddress:userAddress,
+        })
       },
       //错误信息
       fail() {

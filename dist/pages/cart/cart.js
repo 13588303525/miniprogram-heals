@@ -15,7 +15,23 @@ Page({
     // self.getTotalPrice();
     // self.selectAll();
     //this.onShow();
+ // 云开发初始化
+ if (!wx.cloud) {
+  console.error('不支持云开发，请使用 2.2.3 或以上的基础库');
+} else {
+  wx.cloud.init({
+    env: "cloud1-1g1y9qrme91332d1",//这里是你云环境的id,打开云开发面板可以看到
+    traceUser: true
+  });
 
+  wx.cloud.callFunction({
+    name: 'getUserInfo', //云函数名称 
+    complete: res => { 
+       console.log(res.result.openid) //返回值
+       console.log("test")
+    }
+  })
+}
   },
 
   onShow() {
@@ -23,6 +39,7 @@ Page({
     var self = this
     self.data.carts=Object.keys(app.cartItem).map(function(i){return app.cartItem[i]}); //对象转化为数组
     //self.data.carts = app.cartItem;
+    console.log(this.data.carts)
     console.log(app.cartItem);
     console.log("app.cartItem");
  
@@ -47,6 +64,7 @@ Page({
   selectList(e) {
     var self = this
     const index = e.currentTarget.dataset.index;
+    self.data.carts=Object.keys(app.cartItem).map(function(i){return app.cartItem[i]}); //对象转化为数组
     let carts = this.data.carts;
     const selected = carts[index].selected;
     carts[index].selected = !selected;
@@ -64,10 +82,15 @@ Page({
     console.log("deleteList");
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
+    console.log(carts)
     carts.splice(index, 1);
+   // app.cartItem.splice(index,1);
+    delete app.cartItem[index]
+    console.log(index)
+    console.log(app.cartItem)
     this.setData({
       carts: carts
-    });
+    });  
     app.globalData.carts = carts
     if (!carts.length) {
       this.setData({
@@ -101,8 +124,12 @@ Page({
    * 绑定加数量事件
    */
   addCount(e) {
+    console.log("--")
+    console.log(app.cartItem);
+    console.log("--")
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
+    console.log(carts)
     let num = carts[index].num;
     num = num + 1;
     carts[index].num = num;
@@ -110,6 +137,7 @@ Page({
       carts: carts
     });
     app.globalData.carts = carts
+
     this.getTotalPrice();
   },
 

@@ -53,7 +53,7 @@
     <!-- 空购物车 -->
     <view wx:else>
         <view class="cart-no-data">购物车是空的哦~</view>
-        <navigator url='/example/fruit/fruit' open-type="switchTab">
+        <navigator url='/pages/fruit/fruit' open-type="switchTab">
           <view class='cartBtn'>去买水果</view>
         </navigator>
     
