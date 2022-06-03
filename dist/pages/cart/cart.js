@@ -79,26 +79,30 @@ Page({
    * 删除购物车当前商品
    */
   deleteList(e) {
-    console.log("deleteList");
+    console.log("[start] cart.deleteList()---------------");
     const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    console.log(carts)
-    carts.splice(index, 1);
-   // app.cartItem.splice(index,1);
-    delete app.cartItem[index]
-    console.log(index)
-    console.log(app.cartItem)
+    let cartsTemp = this.data.carts;  // 本地购物车
+
+    console.log("[doing] before splice, cartsTemp = "+JSON.stringify(cartsTemp));
+    cartsTemp.splice(index, 1);   // 删除临时变量的条目
     this.setData({
-      carts: carts
+      carts: cartsTemp          // 将临时变量赋值给this.data变量
     });  
-    app.globalData.carts = carts
-    if (!carts.length) {
+    if (!cartsTemp.length) {    
       this.setData({
-        hasList: false
+        hasList: false          // 购物车清空后，hasList置为false，页面展示“购物车是空的哦~”
       });
     } else {
-      this.getTotalPrice();
+      this.getTotalPrice();    // 购物车非空时，重新计算总价
     }
+    console.log("[doing] after splice, cartsTemp = "+JSON.stringify(cartsTemp));
+
+    console.log("[doing] before delete, app.cartItem = "+JSON.stringify(app.cartItem));
+    delete app.cartItem[index];
+    app.globalData.carts = cartsTemp;
+    console.log("[doing] after delete, app.cartItem = "+JSON.stringify(app.cartItem));
+    
+    console.log("[end] cart.deleteList()---------------");
   },
 
   /**
