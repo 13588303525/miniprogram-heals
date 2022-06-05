@@ -16,9 +16,6 @@ Page({
     userAddress: {
     name: '',
     phone: '',
-    // detail: ''
-    detail: 0,
-    message: "",
     address: "",  //地址
     latitude: 0, //首次加载维度
     longitude: 0 //首次加载的经度
